@@ -72,3 +72,21 @@ const account1 = {
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for(const [i, movement] of movements.entries()){
+    if(movement > 1){
+        console.log(`Movement ${i} You have Deposit ${movement}`)
+    }else{
+        console.log(`Movement ${i} You have Withdraw ${Math.abs(movement)}`)
+    }
+}
+
+console.log('--------FOREACH  -------');
+
+movements.forEach(function(movement){
+    if(movement > 1){
+        console.log(`You have Deposit ${movement}`)
+    }else{
+        console.log(`You have Withdraw ${Math.abs(movement)}`)
+    }
+});
