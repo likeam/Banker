@@ -62,7 +62,11 @@ const account1 = {
     const inputClosePin = document.querySelector('.form__input--pin');
 
     const displayMovements = function (movements){
+
+        containerMovements.innerHTML = '';
+
         movements.forEach(function(mov, i){
+
             const type = mov > 0 ? 'deposit' : 'withdrawal';
             const html = `
             <div class="movements__row">
@@ -76,6 +80,8 @@ const account1 = {
     };
     displayMovements(account1.movements);
 
+    console.log(containerMovements.innerHTML);
+
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
     // LECTURES
@@ -87,22 +93,17 @@ const account1 = {
     ['GBP', 'Pound sterling'],
 ]);
 
+
+
+//---------------
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-for(const [i, movement] of movements.entries()){
-    if(movement > 1){
-        console.log(`Movement ${i} You have Deposit ${movement}`)
-    }else{
-        console.log(`Movement ${i} You have Withdraw ${Math.abs(movement)}`)
-    }
-}
+const dollerToPkr =  228;
 
-console.log('--------FOREACH  -------');
-
-movements.forEach(function(movement, index, arry){
-    if(movement > 1){
-        console.log(` Movment ${index+1} You have Deposit ${movement}`)
-    }else{
-        console.log(` Movment ${index+1} You have Withdraw ${Math.abs(movement)}`)
-    }
+const movementsUsdToPkr = movements.map(function(mov){
+    return mov * dollerToPkr;
 });
+
+console.log(movementsUsdToPkr);
+
