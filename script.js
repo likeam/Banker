@@ -148,3 +148,6 @@ console.log(deposit);
 const withdrawls = movements.filter(mov => mov <0);
 console.log(withdrawls);
 
+const account = accounts.find (acc => acc.owner === 'Hania B');
+console.log(account);
+
