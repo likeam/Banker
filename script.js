@@ -6,28 +6,28 @@
 
 // Data
 const account1 = {
-    owner: 'Jonas Schmedtmann',
+    owner: 'Abdul Rehman',
     movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
     interestRate: 1.2, // %
-    pin: 1111,
+    pin: 3131,
     };
 
     const account2 = {
-    owner: 'Jessica Davis',
+    owner: 'Muhmmad Suleman',
     movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
     interestRate: 1.5,
     pin: 2222,
     };
 
     const account3 = {
-    owner: 'Steven Thomas Williams',
+    owner: 'Hania B',
     movements: [200, -200, 340, -300, -20, 50, 400, -460],
     interestRate: 0.7,
     pin: 3333,
     };
 
     const account4 = {
-    owner: 'Sarah Smith',
+    owner: 'Hussain BiBi',
     movements: [430, 1000, 700, 50, 90],
     interestRate: 1,
     pin: 4444,
@@ -61,11 +61,27 @@ const account1 = {
     const inputCloseUsername = document.querySelector('.form__input--user');
     const inputClosePin = document.querySelector('.form__input--pin');
 
+    const displayMovements = function (movements){
+        movements.forEach(function(mov, i){
+            const type = mov > 0 ? 'deposit' : 'withdrawal';
+            const html = `
+            <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
+            <div class="movements__value">${mov}</div>
+            </div>
+            `;
+
+            containerMovements.insertAdjacentHTML('afterbegin', html);
+        });
+    };
+    displayMovements(account1.movements);
+
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
     // LECTURES
 
     const currencies = new Map([
+    ['Rs', 'Pak Ruppe'],
     ['USD', 'United States dollar'],
     ['EUR', 'Euro'],
     ['GBP', 'Pound sterling'],
@@ -83,10 +99,10 @@ for(const [i, movement] of movements.entries()){
 
 console.log('--------FOREACH  -------');
 
-movements.forEach(function(movement){
+movements.forEach(function(movement, index, arry){
     if(movement > 1){
-        console.log(`You have Deposit ${movement}`)
+        console.log(` Movment ${index+1} You have Deposit ${movement}`)
     }else{
-        console.log(`You have Withdraw ${Math.abs(movement)}`)
+        console.log(` Movment ${index+1} You have Withdraw ${Math.abs(movement)}`)
     }
 });
