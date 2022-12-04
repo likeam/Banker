@@ -27,7 +27,7 @@ const account1 = {
     };
 
     const account4 = {
-    owner: 'Hussain BiBi',
+    owner: 'Kanwal BiBi',
     movements: [430, 1000, 700, 50, 90],
     interestRate: 1,
     pin: 4444,
@@ -80,7 +80,18 @@ const account1 = {
     };
     displayMovements(account1.movements);
 
-    console.log(containerMovements.innerHTML);
+    
+    const createUsername = function(accs){
+        accs.forEach(function(acc){
+        acc.username = acc.owner
+        .toLowerCase()
+        .split(' ')
+        .map(name => name[0])
+        .join('');
+    })
+    };
+    createUsername(accounts);
+    console.log(accounts);
 
     /////////////////////////////////////////////////
     /////////////////////////////////////////////////
@@ -101,9 +112,13 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const dollerToPkr =  228;
 
-const movementsUsdToPkr = movements.map(function(mov){
-    return mov * dollerToPkr;
-});
+const movementsUsdToPkr = movements.map(mov => mov * dollerToPkr
+);
 
 console.log(movementsUsdToPkr);
+
+const deposit = movements.filter(mov => mov > 0);
+console.log(deposit);
+const withdrawls = movements.filter(mov => mov <0);
+console.log(withdrawls);
 
