@@ -80,26 +80,27 @@ const displayMovements = function (movements) {
 };
 
 
-const calcDisplayBalance = function (movements) {
-    const balance = movements.reduce((acc, mov) => acc + mov, 0);
-    labelBalance.textContent = `${balance} USD`;
+const calcDisplayBalance = function (acc) {
+    acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+    // acc.balance = balance;
+    labelBalance.textContent = `${acc.balance} USD`;
 };
 
 
-const calcDisplaySummary = function (movements) {
-    const incomes = movements
+const calcDisplaySummary = function (acc) {
+    const incomes = acc.movements
         .filter(mov => mov > 0)
         .reduce((acc, mov) => acc + mov, 0);
     labelSumIn.textContent = `${incomes} USD`;
 
-    const out = movements
+    const out = acc.movements
         .filter(mov => mov < 0)
         .reduce((acc, mov) => acc + mov, 0);
     labelSumOut.textContent = `${Math.abs(out)}`;
 
-    const interst = movements
+    const interst = acc.movements
         .filter(mov => mov > 0)
-        .map(deposit => (deposit * 1.2) / 100)
+        .map(deposit => (deposit * acc.interestRate) / 100)
         .reduce((acc, int) => acc + int, 0);
     labelSumInterest.textContent = `${interst} USD`
 };
@@ -140,11 +141,28 @@ btnLogin.addEventListener('click', function (e) {
         displayMovements(currentAccount.movements);
 
         //Display Balance
-        calcDisplayBalance(currentAccount.movements);
+        calcDisplayBalance(currentAccount);
 
         //Display Summery
-        calcDisplaySummary(currentAccount.movements);
+        calcDisplaySummary(currentAccount);
     }
+});
+
+btnTransfer.addEventListener('click', function(e){
+    e.preventDefault();
+    const amount = Number(inputTransferAmount.value);
+    
+    const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+    console.log(amount, receiverAcc);
+    if(amount > 0 &&
+            receiverAcc &&
+            currentAccount.balance >= amount &&
+            receiverAcc?.username !==  currentAccount.username){
+                
+                //Doing the Transfar
+                currentAccount.movements.push(-amount);
+                receiverAcc.movements.push(amount);
+            }
 });
 
 
