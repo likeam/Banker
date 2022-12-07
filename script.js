@@ -61,7 +61,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
 
     containerMovements.innerHTML = '';
 
@@ -177,6 +177,17 @@ btnTransfer.addEventListener('click', function(e){
             }
 });
 
+
+btnLoan.addEventListener('click', function(e){
+    e.preventDefault();
+
+    const amount = Number(inputLoanAmount.value);
+
+    if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)){
+
+    }
+});
+
 btnClose.addEventListener('click', function(e){
     e.preventDefault();
  
@@ -215,6 +226,8 @@ const currencies = new Map([
 //---------------
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+movements.sort((a,b) => b-a);
+console.log(movements);
 
 const dollerToPkr = 228;
 
