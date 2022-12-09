@@ -65,6 +65,9 @@ const displayMovements = function (movements, sort = false) {
 
     containerMovements.innerHTML = '';
 
+    const moves = sort ? movements.slice().sort((a,b) => a - b) : movements;
+
+
     movements.forEach(function (mov, i) {
 
         const type = mov > 0 ? 'deposit' : 'withdrawal';
@@ -206,6 +209,13 @@ btnClose.addEventListener('click', function(e){
 
         inputCloseUsername.value = inputClosePin.value = '';
 
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function(e){
+    e.preventDefault();
+    displayMovements(currentAccount.movements, !sorted);
+    sorted = !sorted;
 });
 
 
