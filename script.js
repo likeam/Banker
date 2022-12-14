@@ -19,9 +19,9 @@ const account1 = {
         '2020-05-27T17:01:17.194Z',
         '2020-07-11T23:36:17.929Z',
         '2020-07-12T10:51:36.790Z',
-        ],
+    ],
     currency: 'USD',
-    locale: 'en-PAK', 
+    locale: 'en-PAK',
 };
 
 const account2 = {
@@ -89,7 +89,7 @@ const displayMovements = function (movements, sort = false) {
 
     containerMovements.innerHTML = '';
 
-    const moves = sort ? movements.slice().sort((a,b) => a - b) : movements;
+    const moves = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
 
     movements.forEach(function (mov, i) {
@@ -145,15 +145,15 @@ const createUsername = function (accs) {
 };
 createUsername(accounts);
 
-const updateUI = function(acc){
-        //Display Movements
-        displayMovements(acc.movements);
+const updateUI = function (acc) {
+    //Display Movements
+    displayMovements(acc.movements);
 
-        //Display Balance
-        calcDisplayBalance(acc);
+    //Display Balance
+    calcDisplayBalance(acc);
 
-        //Display Summery
-        calcDisplaySummary(acc);
+    //Display Summery
+    calcDisplaySummary(acc);
 }
 
 //Event Handler
@@ -181,62 +181,62 @@ btnLogin.addEventListener('click', function (e) {
     }
 });
 
-btnTransfer.addEventListener('click', function(e){
+btnTransfer.addEventListener('click', function (e) {
     e.preventDefault();
     const amount = Number(inputTransferAmount.value);
-    
+
     const receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
     console.log(amount, receiverAcc);
     inputTransferAmount.value = inputTransferTo.value = '';
 
-    if(amount > 0 &&
-            receiverAcc &&
-            currentAccount.balance >= amount &&
-            receiverAcc?.username !==  currentAccount.username){
-                
-                //Doing the Transfar
-                currentAccount.movements.push(-amount);
-                receiverAcc.movements.push(amount);
+    if (amount > 0 &&
+        receiverAcc &&
+        currentAccount.balance >= amount &&
+        receiverAcc?.username !== currentAccount.username) {
 
-                        
-                //updateUI
-                updateUI(currentAccount);
-            }
+        //Doing the Transfar
+        currentAccount.movements.push(-amount);
+        receiverAcc.movements.push(amount);
+
+
+        //updateUI
+        updateUI(currentAccount);
+    }
 });
 
 
-btnLoan.addEventListener('click', function(e){
+btnLoan.addEventListener('click', function (e) {
     e.preventDefault();
 
     const amount = +(inputLoanAmount.value);
 
-    if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)){
+    if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
 
     }
 });
 
-btnClose.addEventListener('click', function(e){
+btnClose.addEventListener('click', function (e) {
     e.preventDefault();
- 
-    if(inputCloseUsername.value === currentAccount.username &&
-        +(inputClosePin.value) === currentAccount.pin){
-            
 
-            const index = accounts.findIndex(acc => acc.username === currentAccount.username);
-            console.log(index);
-            accounts.splice(index, 1);
+    if (inputCloseUsername.value === currentAccount.username &&
+        +(inputClosePin.value) === currentAccount.pin) {
 
-            //Hide UI
-            containerApp.style.opacity = 0;
 
-        }
+        const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+        console.log(index);
+        accounts.splice(index, 1);
 
-        inputCloseUsername.value = inputClosePin.value = '';
+        //Hide UI
+        containerApp.style.opacity = 0;
+
+    }
+
+    inputCloseUsername.value = inputClosePin.value = '';
 
 });
 
 let sorted = false;
-btnSort.addEventListener('click', function(e){
+btnSort.addEventListener('click', function (e) {
     e.preventDefault();
     displayMovements(currentAccount.movements, !sorted);
     sorted = !sorted;
@@ -260,7 +260,7 @@ const currencies = new Map([
 //---------------
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-movements.sort((a,b) => b-a);
+movements.sort((a, b) => b - a);
 console.log(movements);
 
 const dollerToPkr = 228;
@@ -286,5 +286,5 @@ console.log('December 29, 1981');
 console.log(account1.movementsDates[0]);
 
 console.log(account2.movementsDates[4]);
-console.log(new Date(4));
+console.log(new Date(3));
 
