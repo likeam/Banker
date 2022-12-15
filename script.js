@@ -286,5 +286,5 @@ console.log('December 29, 1981');
 console.log(account1.movementsDates[0]);
 
 console.log(account2.movementsDates[4]);
-console.log(new Date(3));
+console.log(new Date(6));
 
